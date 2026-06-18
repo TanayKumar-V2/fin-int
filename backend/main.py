@@ -1,7 +1,6 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from src.config import settings
-from src.api.routes import health
+from src.api.middleware import setup_middleware
+from src.api.routes import health, documents
 
 app = FastAPI(
     title="DueDiligenceAI API",
@@ -9,17 +8,12 @@ app = FastAPI(
     description="Backend API for AI Due Diligence Copilot"
 )
 
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Set up middleware
+setup_middleware(app)
 
 # Include routers
 app.include_router(health.router)
+app.include_router(documents.router)
 
 if __name__ == "__main__":
     import uvicorn
