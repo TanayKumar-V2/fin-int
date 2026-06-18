@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - CHROMA_DB_PATH=/app/chroma_db
+      - UPLOADS_DIR=/app/uploads
+      - BM25_INDEX_DIR=/app/bm25_indexes
+      - CORS_ORIGINS=["http://localhost", "http://localhost:5173"]
+    volumes:
+      - data_volume:/app/uploads
+      - db_volume:/app/chroma_db
+      - bm25_volume:/app/bm25_indexes
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  data_volume:
+  db_volume:
+  bm25_volume:
