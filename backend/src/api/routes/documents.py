@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 import aiofiles
 
 from src.models.document import DocumentRecord, DocumentStatus
-from src.rag.pipeline import process_document_pipeline, get_db, save_db
+from src.rag.pipeline import process_document_pipeline, get_db, save_db, vector_store, bm25_manager
 from src.config import settings
 
 router = APIRouter(prefix="/api/documents", tags=["documents"])
@@ -79,6 +79,8 @@ async def delete_document(doc_id: str):
             pass
             
     # Phase 3: remove from vector store
+    vector_store.delete_document(doc_id)
+    bm25_manager.remove_document(doc_id)
     
     del db[doc_id]
     save_db(db)
