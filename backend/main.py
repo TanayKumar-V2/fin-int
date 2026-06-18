@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from src.api.middleware import setup_middleware
-from src.api.routes import health, documents
+from src.api.routes import health, documents, analysis
 
 app = FastAPI(
     title="DueDiligenceAI API",
@@ -14,6 +14,7 @@ setup_middleware(app)
 # Include routers
 app.include_router(health.router)
 app.include_router(documents.router)
+app.include_router(analysis.router)
 
 if __name__ == "__main__":
     import uvicorn
