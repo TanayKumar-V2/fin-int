@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0A0F1E;
+  --color-surface: #0F1829;
+  --color-surface2: #162035;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-cyan: #00D4FF;
+  --color-amber: #F59E0B;
+  --color-emerald: #10B981;
+  --color-rose: #F43F5E;
+  --color-muted: #8892A4;
+  --color-text: #E8EDF5;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-navy text-text font-sans antialiased;
+    margin: 0;
+  }
+}
