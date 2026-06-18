@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     CHUNK_OVERLAP: int = 150
     MAX_RETRIEVAL_RESULTS: int = 8
     GEMINI_MODEL: str = "gemini-2.0-flash"
-    GEMINI_EMBEDDING_MODEL: str = "text-embedding-004"
+    GEMINI_EMBEDDING_MODEL: str = "gemini-embedding-2"
     CORS_ORIGINS: list[str] = ["http://localhost:5173"]
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
